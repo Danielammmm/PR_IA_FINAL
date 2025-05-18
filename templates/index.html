@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traductor de Lenguaje de Señas en Tiempo Real 📹</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        #video-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #video {
+            max-width: 600px;
+            border: 4px solid #333;
+            border-radius: 10px;
+            background-color: #000;
+        }
+
+        #controls {
+            margin-top: 10px;
+        }
+
+        #prediction {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        #landmarks-toggle {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #landmarks-toggle:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Traductor de Lenguaje de Señas en Tiempo Real 📹</h1>
+
+    <div id="video-container">
+        <video id="video" autoplay muted></video>
+    </div>
+
+    <div id="controls">
+        <button id="landmarks-toggle" onclick="toggleLandmarks()">Ver Landmarks</button>
+    </div>
+
+    <p id="prediction">Predicción: No hand detected (0.00%)</p>
+
+    <script>
+        let video = document.getElementById('video');
+        let showLandmarks = false;
+
+        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+            video.srcObject = stream;
+        });
+
+        function toggleLandmarks() {
+            showLandmarks = !showLandmarks;
+            document.getElementById('landmarks-toggle').innerText = showLandmarks ? 'Ocultar Landmarks' : 'Ver Landmarks';
+        }
+
+        // Aquí puedes integrar el modelo de detección y landmarks de tu aplicación
+        // para que se muestre dinámicamente si se activa showLandmarks
+    </script>
+</body>
+</html>
